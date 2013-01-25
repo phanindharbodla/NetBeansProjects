@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <servlet-name>InsertData</servlet-name>
+        <servlet-class>practice.InsertData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InsertData</servlet-name>
+        <url-pattern>/InsertData</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateData</servlet-name>
+        <servlet-class>practice.UpdateData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateData</servlet-name>
+        <url-pattern>/UpdateData</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteData</servlet-name>
+        <servlet-class>practice.DeleteData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteData</servlet-name>
+        <url-pattern>/DeleteData</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SelectData</servlet-name>
+        <servlet-class>practice.SelectData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SelectData</servlet-name>
+        <url-pattern>/SelectData</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <resource-ref>
+        <res-ref-name>jdbc/</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+</web-app>
