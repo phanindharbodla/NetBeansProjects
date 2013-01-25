@@ -19,7 +19,8 @@ public class MainApp {
         obj1.setEmployee("Indira");
         System.out.println(obj1.getEmployee());
         DemoSpring obj2= (DemoSpring) context.getBean("whoSthis");
+        //obj2.setEmployee("Indhra");
         System.out.println(obj2.getEmployee());
-        // so with out setting the obj2 value we are getting the value coz the session of obj is singleton which is setted at the obj1 intiation 
+        // so with setting the obj2 value we are getting the value coz the session of obj is protype which is setted at the obj1 intiation else default val one will  be given
     }
 }

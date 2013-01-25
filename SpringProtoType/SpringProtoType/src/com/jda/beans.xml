@@ -3,7 +3,7 @@
                                              xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="whoSthis" class="com.jda.DemoSpring" scope="singleton">
+    <bean id="whoSthis" class="com.jda.DemoSpring" scope="prototype">
         <property name="employee" value="Phanindhar Bodla"/>
     </bean>
 </beans>
