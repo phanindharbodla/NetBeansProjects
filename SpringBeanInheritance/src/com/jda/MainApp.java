@@ -4,9 +4,8 @@ package com.jda;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- *
- * @author phanindhar bodla
+/*
+ * @author Phanindhar Bodla
  */
 public class MainApp {
 

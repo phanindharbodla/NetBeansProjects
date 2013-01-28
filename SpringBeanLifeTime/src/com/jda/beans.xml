@@ -5,9 +5,9 @@
 default-init-method="init" 
     default-destroy-method="destroy">
 
-    <bean id="whoSthis" class="com.jda.DemoSpring" 
+    <bean id="whoSthis" class="com.jda.DemoSpring" >
 <!--        you can define here if default is not written  init-method="init" destroy-method="destroy" -->
-    >
+    
         <property name="employee" value="Phanindhar Bodla"/>
     </bean>
 </beans>
