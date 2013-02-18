@@ -16,6 +16,7 @@ public class MainApp {
         bps.getTeacherSubjects();
         bps.getTeachersIds();
         bps.getTimetable();
+        System.out.println("We can Also assign null value to property default as <null/> .!!");
         context.registerShutdownHook();
     }
 }
