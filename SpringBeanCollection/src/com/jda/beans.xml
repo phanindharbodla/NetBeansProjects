@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+                                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   
+    <bean id="school" class="com.jda.School" >
+        <property name="teachersNames">
+            <list>
+                <value>Shamsuddin</value>
+                <value>Sridhar</value>
+                <value>Shanti</value>
+                <value>Kishan</value>
+                <value>Vijaya</value>
+                <value>Vijaya</value>
+            </list>
+        </property>
+        <property name="teachersIds">
+            <set>
+            <value>a</value>
+            <value>s</value>
+            <value>d</value>
+            <value>f</value>
+            <value>g</value>
+            <value>h</value>
+            </set>
+        </property>
+        <property name="teacherSubjects">
+            <props>
+                <prop key="1">Maths</prop>
+                <prop key="2">Chemistry</prop>
+                <prop key="3">Biology</prop>
+                <prop key="4">Hindi</prop>
+                <prop key="5">Telugu</prop>
+                <prop key="6">Economics</prop>
+            </props>
+        </property>
+        <property name="timetable">
+            <map> 
+                <entry key="1" value="1"/>      
+                <entry key="2" value="2"/>      
+                <entry key="3" value="3"/>      
+                <entry key="4" value="4"/>      
+                <entry key="5" value="5"/>      
+                <entry key="6" value="6"/>      
+            </map>
+        </property>
+    </bean>
+</beans>
