@@ -23,7 +23,7 @@ public class HelloWorld {
     document.open();
     
     document.add(new Paragraph("Phanindhar Bodla"));
-    document.add(new Paragraph("Nit Warangal    "));
+    document.add(new Paragraph("Nit Warangal"));
     document.close();
   }
 }
