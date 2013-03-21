@@ -9,6 +9,10 @@ public class Casting {
     {
     int i=10;
     String s ="key";
+    String d ="key";
+    d=d.toUpperCase();
+    System.out.println(s);
+    System.out.println(d);
     Object m =i ;
     Object n =s ;
     i=(Integer)m;
