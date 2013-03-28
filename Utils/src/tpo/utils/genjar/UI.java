@@ -72,7 +72,7 @@ public class UI extends JPanel
                 outputFile.write(home.substring(0, 2));
                 outputFile.newLine();
                 outputFile.write("cd "+home);
-                outputFile.newLine();
+                outputFile.newLine(); 
                 outputFile.write(classes);
             }
             Runtime.getRuntime().exec(home+"\\makeJar.cmd");
