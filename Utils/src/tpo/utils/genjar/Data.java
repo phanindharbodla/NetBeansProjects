@@ -9,9 +9,12 @@ import java.util.jar.*;
 public class Data
 {
 
-    private Data()
+   Set<String> paths = new HashSet();
+
+    private Data() 
     {
         _mainClass = null;
+        
     }
 
     public List getEntries()
@@ -46,6 +49,8 @@ public class Data
         if(f.isDirectory())
             return add(container, f.listFiles());
         List ents = new ArrayList();
+        //System.out.println(f.getAbsoluteFile());
+        paths.add(f.getAbsolutePath());
         FileEntry fEnt = new FileEntry(container, f);
         if(!_entries.contains(fEnt))
         {
@@ -80,6 +85,8 @@ public class Data
     public void rem(FileEntry fe)
     {
         int ix = _entries.indexOf(fe);
+        //System.out.println(fe.file.getAbsoluteFile());
+        paths.remove(fe.file.getAbsoluteFile());
         if(_entries.remove(ix) != null)
             Events.REM.post(new Integer(ix));
     }

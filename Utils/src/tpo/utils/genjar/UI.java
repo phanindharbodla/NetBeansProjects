@@ -9,19 +9,22 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class UI extends JPanel
@@ -32,55 +35,48 @@ public class UI extends JPanel
 
         public void actionPerformed(ActionEvent e)
         {
-            ExampleFileFilter eff = new ExampleFileFilter();
-            eff.addExtension("jar");
-            eff.setDescription("Java Archive");
-            JFileChooser jfc = new JFileChooser();
-            jfc.setFileFilter(eff);
-            jfc.setSelectedFile(new File("untitled.jar"));
-            int opt = jfc.showSaveDialog(UI.this);
-            if(opt == 0)
-            {
-                File f = jfc.getSelectedFile();
-                if(canWriteFile(f))
-                    mkJar(ensureExtn(f));
+//            ExampleFileFilter eff = new ExampleFileFilter();
+//            eff.addExtension("jar");
+//            eff.setDescription("Java Archive");
+//            JFileChooser jfc = new JFileChooser();
+//            jfc.setFileFilter(eff);
+//            jfc.setSelectedFile(new File("1Consolidated.jar"));
+//            int opt = jfc.showSaveDialog(UI.this);
+            try {
+                genScript();
+            } catch (IOException ex) {
+                Logger.getLogger(UI.class.getName()).log(Level.SEVERE, null, ex);
             }
+//            if(opt == 0)
+//            {
+//                File f = jfc.getSelectedFile();     
+//                
+//            }
         }
-
-        private File ensureExtn(File f)
+        public void genScript() throws IOException
         {
-            if(f.getPath().toLowerCase().endsWith(".jar"))
-                return f;
-            else
-                return new File(f.getPath() + ".jar");
+            
+            FileEntry temp=null; 
+            
+            String temp2,temp1,classes="jar -cvf 1TPOUpdate.jar";
+            String home = Run.home;
+            for(int i=0; i<Data.INSTANCE.getEntries().size();i++)
+            {
+                temp=(FileEntry) Data.INSTANCE.getEntries().get(i);
+                temp1=temp.file.getAbsolutePath();
+                temp2=temp1.substring(home.length()+1);
+                classes = classes+"  "+temp2;
+            }
+            //System.out.println(classes);
+            try (BufferedWriter outputFile = new BufferedWriter(new FileWriter(home+"\\makeJar.cmd"))) {
+                outputFile.write(home.substring(0, 2));
+                outputFile.newLine();
+                outputFile.write("cd "+home);
+                outputFile.newLine();
+                outputFile.write(classes);
+            }
+            Runtime.getRuntime().exec(home+"\\makeJar.cmd");
         }
-
-        private boolean canWriteFile(File f)
-        {
-            SecurityManager sm = System.getSecurityManager();
-            try
-            {
-                sm.checkWrite(f.getPath());
-            }
-            catch(SecurityException se)
-            {
-                String title = "Oops!";
-                String msg = "Unable to write selected file.\nProblem: " + se.getMessage();
-                JOptionPane.showMessageDialog(UI.this, msg, "Oops!", 0);
-                return false;
-            }
-            if(f.exists())
-            {
-                String title = "Hmmm...";
-                String msg = "Overwrite existing file: " + f.getName();
-                int op = JOptionPane.showConfirmDialog(UI.this, msg, "Hmmm...", 2);
-                return op == 0;
-            } else
-            {
-                return true;
-            }
-        }
-
         CreateJAR()
         {
         }
@@ -97,6 +93,7 @@ public class UI extends JPanel
         }
 
         private final Component _c;
+        
 
         public EntryFollower(Component c)
         {
@@ -114,10 +111,11 @@ public class UI extends JPanel
         try
         {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            //UIManager.setLookAndFeel(UIManager.getLookAndFeel());
         }
-        catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException exception) { exception.toString();}
+        catch(Exception exception) { exception.toString();}
         JLabel labThisComp = new JLabel("Files on this Computer");
-        JLabel labJarFiles = new JLabel("Jar Files");
+        JLabel labJarFiles = new JLabel("Files To Be Added In Jar");
         JButton btAdd = new JButton(new AddAction(_fileTree));
         JButton btRem = new JButton(new RemoveAction(_entList));
         new EntryFollower(btRem);
@@ -158,12 +156,12 @@ public class UI extends JPanel
         setCursor(WAIT_CURSOR);
         try
         {
-            Data.INSTANCE.createJAR(f);
+            //Data.INSTANCE.createJAR(f);
         }
         catch(Exception ex)
         {
             setCursor(DEFAULT_CURSOR);
-            String title = "Ouch!";
+            //String title = "Ouch!";
             String msg = "Failed to create JAR.\nProblem: " + ex.getMessage();
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, msg, "Ouch!", 0);

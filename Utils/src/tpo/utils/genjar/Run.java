@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileSystemView;
 
 public class Run extends JApplet
 {
+    static String home;
 
     public Run()
     {
@@ -34,13 +35,15 @@ public class Run extends JApplet
 
     private static File home()
     {
-        return FileSystemView.getFileSystemView().getHomeDirectory();
+        
+        return FileSystemView.getFileSystemView().createFileObject(home);
     }
 
     public static void main(String args[])
     {
         final UI ui = new UI();
-        JFrame frm = new JFrame("Jar Creator");
+        home = args[0];//"C:\\Users\\j1013563\\Desktop";//
+        JFrame frm = new JFrame("Make Jar");
         frm.setDefaultCloseOperation(3);
         frm.setSize(600, 580);
         frm.setLocationRelativeTo(null);
