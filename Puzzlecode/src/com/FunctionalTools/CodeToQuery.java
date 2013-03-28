@@ -36,7 +36,7 @@ public class CodeToQuery {
     private static String process(String strLine) {
         String line = "";
         int j = strLine.length();
-        try {
+         {
             if (j != 0) {
                 for (int i = 0; i < j; i++) {
                     if (strLine.charAt(i) == '"') {
@@ -48,8 +48,7 @@ public class CodeToQuery {
                     }
                 }
             }
-        } catch (Exception e) {
-        }
+        } 
         return line;
     }
 }

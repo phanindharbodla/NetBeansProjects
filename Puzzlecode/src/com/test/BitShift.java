@@ -12,10 +12,10 @@ package com.test;
 public class BitShift {
     public static void main(String args[])
     {
-        int a=12312,b=31,c,d,df=0XFFFFFFFF;
+        int a=12312,b=31,c,df=0XFFFFFFFF;
         c=(a<<31-b>>31-b);
         df=((1<<b)-1);
-        d=a&df;
+        c=a&df;
     }
 
 }

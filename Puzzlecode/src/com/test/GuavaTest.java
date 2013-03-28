@@ -7,8 +7,6 @@ package com.test;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -18,7 +16,7 @@ public class GuavaTest {
     public static void main(String args[])
     {
         BiMap<Integer, String> bimap = HashBiMap.create();
-        Map i=new HashMap();
+        //Map i=new HashMap();
         bimap.put(121, "string");
         bimap.put(123, "strn2g");
         bimap.put(123, "rng123");
