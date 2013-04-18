@@ -1,3 +1,31 @@
-	private static final String GET_OPT_PLP_OPTIONS = " SELECT RUN_EXPLOSION_SW, CALC_REC_AUTH_SW, USE_PRE_CALC_REC_AUTH_SW, USE_DFU_DT_INTERVAL_REC_SW, USE_RESRC_DT_REC_INTERVAL_SW, RESULT_PUBLICATION_DATE FROM NPO_OPT_PROCESS_OPTIONS WHERE RUN_ID = " +
-			" ( SELECT MAX(RUN_ID) FROM NPO_OPT_PROCESS_OPTIONS where RESRC_ID =  ? ) AND RESRC_ID = ? ";
-	
+ query.append("INSERT  /*+ append nologging */  INTO NPO_SALES_TYPE2_DATA (DFU_ID, STARTDATE, QTY, RSRC_ID) ");
+        }
+
+        query.append(" SELECT DFUDT.DFU_ID ,DFUDT.STARTDATE, SUM(QTY) QTY, DFUDT.LOC");
+        query.append(" FROM PROCESSNPODFU PNPODFU, HIST, NPO_DFU_DT DFUDT");
+        query.append(" WHERE PNPODFU.NPO_DFU_ID  = DFUDT.DFU_ID ");
+        query.append(" AND PNPODFU.DFU_STARTDATE = DFUDT.STARTDATE ");
+        query.append(" AND HIST.DMDUNIT          = DFUDT.DMDUNIT");
+        query.append(" AND HIST.DMDGROUP         = DFUDT.DMDGROUP");
+        query.append(" AND HIST.LOC              = DFUDT.LOC");
+        query.append(" AND HIST.EVENT IN (" + type2EventsStr + ")");
+        query.append(" AND DFUDT.STARTDATE  BETWEEN HIST.STARTDATE AND (HIST.STARTDATE+HIST.DUR/1440-1)");
+        query.append(" AND PNPODFU.PROCESSID = ? ");
+        query.append(" AND PNPODFU.ACTION_NUMBER = ? ");
+        query.append(" AND HIST.TYPE=2 and HIST.HISTSTREAM = ? ");
+        query.append(" GROUP  BY DFUDT.DFU_ID, DFUDT.STARTDATE, DFUDT.LOC ");
+
+String salesInfoQuery = " SELECT DFU_ID, STARTDATE, QTY FROM NPO_SALES_TYPE2_DATA WHERE RSRC_ID = ? ORDER BY DFU_ID, STARTDATE ";
+        return salesInfoQuery;
+    }
+
+    protected String getSalesDataFromTPO()
+    {
+        StringBuffer query = new StringBuffer("SELECT DFUDT.DFU_ID ,DFUDT.STARTDATE, SUM(DFUDT.EXT_HIST_QTY) QTY");
+        query.append(" FROM PROCESSNPODFU PNPODFU, NPO_DFU_DT DFUDT");
+        query.append(" WHERE PNPODFU.NPO_DFU_ID  = DFUDT.DFU_ID ");
+        query.append(" AND PNPODFU.DFU_STARTDATE = DFUDT.STARTDATE ");
+        query.append(" AND PNPODFU.PROCESSID = ? ");
+        query.append(" AND PNPODFU.ACTION_NUMBER = ? ");
+        query.append(" GROUP  BY DFUDT.DFU_ID, DFUDT.STARTDATE ");
+        query.append(" ORDER  BY DFUDT.DFU_ID");
