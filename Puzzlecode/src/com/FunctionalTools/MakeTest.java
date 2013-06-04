@@ -28,7 +28,7 @@ class MakeTest {
                         writer.close();
                     }
                     writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\j1013563\\Documents\\NetBeansProjects\\Puzzlecode\\src\\com\\FunctionalTools\\test" + (count / maxlines) + ".lp"), encoding));
-                }
+                }//[+][^+-]+ in notepad++
                 String re1 = "(\\+)";	// Any Single Character 1
                 String re2 = "(\\s+)";	// White Space 1
                 String re3 = "(0)";	// Any Single Character 2
